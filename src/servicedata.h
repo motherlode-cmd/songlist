@@ -10,12 +10,12 @@ public:
     ServiceData() = default;
 
     QList <Song*> readFile();
-    void writeFile(QList <Song*> song);
+    void writeFile(QList<Song *> song);
     void savePixmap(QPixmap image, Song * song);
     QStandardItem * standardItemPixmap(Song * current);
 
 private:
-    QPixmap drowPixmap(QString imageName);
-    QList <Song*> parseData(QString val);
+    QPixmap drowPixmap(QString& imageName);
+    QList <Song*> parseData(QString &val);
 };
 

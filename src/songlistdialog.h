@@ -36,7 +36,7 @@ private:
     void setRowTools(int row);
     void setTableTools();
     void disableButtons(bool state);
-    void fillRow(Song * current, int number);
+    void fillRow(Song * current, int& currentRowNumber);
     void fillTable();
     Ui::SongListDialog* m_ui = nullptr;
     QStandardItemModel* model = nullptr;

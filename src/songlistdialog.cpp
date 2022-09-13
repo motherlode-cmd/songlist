@@ -28,13 +28,13 @@ SongListDialog::~SongListDialog()
     delete m_ui;
 }
 
-void SongListDialog::fillRow(Song *current, int rowCount) //функция заполнени строки таблицы данными из файла
+void SongListDialog::fillRow(Song *current, int &currentRowNumber) //функция заполнени строки таблицы данными из файла
 {
-    model->setItem(rowCount, 0, ServiceData().standardItemPixmap(current));
-    model->setItem(rowCount, 1,  new QStandardItem(current->getName()));
-    model->setItem(rowCount, 2, new QStandardItem(current->getAuthor()));
-    model->setItem(rowCount, 3,  new QStandardItem(current->getTime()));
-    model->setItem(rowCount, 4, new QStandardItem(current->getStatus()));
+    model->setItem(currentRowNumber, 0, ServiceData().standardItemPixmap(current));
+    model->setItem(currentRowNumber, 1,  new QStandardItem(current->getName()));
+    model->setItem(currentRowNumber, 2, new QStandardItem(current->getAuthor()));
+    model->setItem(currentRowNumber, 3,  new QStandardItem(current->getTime()));
+    model->setItem(currentRowNumber, 4, new QStandardItem(current->getStatus()));
 }
 
 void SongListDialog::fillTable()//считывание файла и заполнение построчечно таблицы данными
@@ -73,7 +73,7 @@ void SongListDialog::on_btnCreate_clicked() //нажата кнопка созд
     if(dlg.isChanged()) { //true если данные внесены в таблицу, false - в противном случае
         m_ui->pushButton_save->setEnabled(true);
         m_ui->pushButton_sort->setEnabled(true);
-        setRowTools(num-1);//после изменений необходимо проверить состояние таблицы
+        setRowTools(num - 1);//после изменений необходимо проверить состояние таблицы
     }
 }
 

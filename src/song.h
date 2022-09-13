@@ -5,15 +5,15 @@
 class Song //класс для хранения информации о песни, используемый исключительно для работы с хранением информации
 {
 public:
-    Song(QString name, QString author, QString time, QString imgName, QString status);
-    const QString &getName() const;
-    const QString &getAuthor() const;
-    void setImageName(QString name);
-    const QString &getTime() const;
+    explicit Song(const QString &name, const QString &author, const QString &time, const QString &imgName, const QString &status);
+    QString &getName() ;
+    QString &getAuthor() ;
+    void setImageName(QString &name);
+    QString &getTime() ;
 
-    const QString &getStatus() const;
+    QString &getStatus() ;
 
-    const QString &getImgName() const;
+    QString &getImgName();
 
 private:
     QString name; //значения соответствующих ячеек таблицы

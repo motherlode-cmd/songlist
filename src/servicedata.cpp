@@ -23,6 +23,7 @@ QList <Song*> ServiceData::readFile() //в текущей директории �
        // return QList <Song*>;
      }
      val = file.readAll();
+     //QString & linkVal = val;
      file.close();
      return parseData(val);
 }
@@ -63,13 +64,15 @@ void ServiceData::savePixmap(QPixmap image, Song * song) //сохранение 
         if(!ok) return;
     }//если еще нет папки, то мы ее создаем
     QFile file(dir->path() + "/images/" + song->getImgName());
-    song->setImageName(dir->path() + "/images/" + song->getImgName()); //меняем название картинки на путь к файлу
+    QString tmp = dir->path() + "/images/" + song->getImgName();
+    QString &newImageName = tmp;
+    song->setImageName(newImageName); //меняем название картинки на путь к файлу
     file.open(QIODevice::WriteOnly);
     image.save(&file, "PNG");
 
 }
 
-QPixmap ServiceData::drowPixmap(QString imageName)//достаем картинку по названию
+QPixmap ServiceData::drowPixmap(QString &imageName)//достаем картинку по названию
 {
     QPixmap pix;
     QFile file(imageName);
@@ -88,7 +91,7 @@ QStandardItem * ServiceData::standardItemPixmap(Song * current) //приводи
 
 
 
-QList <Song*> ServiceData::parseData(QString val) //получаем лист песен из файла
+QList <Song*> ServiceData::parseData(QString& val) //получаем лист песен из файла
 {
     QList <Song*> listItems;
     QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());

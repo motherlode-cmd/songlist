@@ -74,13 +74,13 @@ QString SongDialog::fullImagePath(const QString& relativePath) const
     return dir.absoluteFilePath(relativePath);
 }
 
-void SongDialog::setToolStr(const QString strTool)
+void SongDialog::setToolStr(const QString &strTool)
 {
     this->strTool = strTool;
     m_ui->buttonBox_OK->setToolTip(strTool);
 }
 
-void SongDialog::preview_draw(int numb)//запись измененной картинки в таблицу
+void SongDialog::preview_draw(int &numb)//запись измененной картинки в таблицу
 {
     if(check)
     {
@@ -93,7 +93,7 @@ void SongDialog::preview_draw(int numb)//запись измененной ка�
     }
 }
 
-void SongDialog::write_albom_info(int numb)//перенос введенных данных в таблицу
+void SongDialog::write_albom_info(int &numb)//перенос введенных данных в таблицу
 {
     const QString slide = QString::number(m_ui->status->value());
     model->setItem(numb, 1, new QStandardItem(m_ui->lineEdit_name->text()));
@@ -102,7 +102,7 @@ void SongDialog::write_albom_info(int numb)//перенос введенных �
     model->setItem(numb, 4, new QStandardItem(slide));
 }
 
-void SongDialog::set_info(int numb)//заполнение данными из таблицы при нажатии кнопки редактировать
+void SongDialog::set_info(int &numb)//заполнение данными из таблицы при нажатии кнопки редактировать
 {
     m_ui->labelPreview->setPixmap(model->item(numb,0)->data(Qt::DecorationRole).value<QPixmap>());
     m_ui->lineEdit_name->setText((model->item(numb, 1))->text());

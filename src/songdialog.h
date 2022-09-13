@@ -15,7 +15,6 @@ private:
     QString copiedPreview(const QString& filePath) const;
     void showPreview(const QString& relativePath) const;
     QString fullImagePath(const QString& relativePath) const;
-
     Ui::SongDialog* m_ui = nullptr;
     const QString m_imageDir = "../../images";
     QStandardItemModel * model;
@@ -29,7 +28,7 @@ private:
     bool isSongCreated = true;
     QString strTool = "ВВедите недостающие данные";
 public:
-    void setToolStr(const QString strTool_);
+    void setToolStr(const QString& strTool_);
 
     void setCreatedParam(bool setting)
     {
@@ -49,9 +48,9 @@ public:
         model = model_;
     }
 
-    void preview_draw(int numb);
-    void write_albom_info(int numb);
-    void set_info(int numb);
+    void preview_draw(int& numb);
+    void write_albom_info(int& numb);
+    void set_info(int& numb);
     void unblock_ok();
     SongDialog(QWidget* parent = nullptr);
     ~SongDialog();
