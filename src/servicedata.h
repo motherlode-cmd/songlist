@@ -7,7 +7,7 @@
 class ServiceData
 {
 public:
-    ServiceData();
+    ServiceData() = default;
 
     QList <Song*> readFile();
     void writeFile(QList <Song*> song);

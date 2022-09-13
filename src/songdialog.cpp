@@ -74,40 +74,10 @@ QString SongDialog::fullImagePath(const QString& relativePath) const
     return dir.absoluteFilePath(relativePath);
 }
 
-void SongDialog::change_model(QStandardItemModel * model)
-{
-    this->model = model;
-}
-
 void SongDialog::setToolStr(const QString strTool)
 {
     this->strTool = strTool;
     m_ui->buttonBox_OK->setToolTip(strTool);
-}
-
-void SongDialog::setCreatedParam(bool setting) //теперь мы знаем, едактор вызвал это окно или кнопка создать
-{
-    this->isSongCreated = setting;
-}
-
-bool SongDialog::isChanged() //true если нажата кнопка Ок
-{
-    return !cancelButtonClicked;
-}
-
-void SongDialog::setNum(int * num)//переданный номер текущей строки
-{
-    this->num = num;
-}
-
-void SongDialog::statusSetValue(int value)//после каждого изменения слайдера активируется сигнал проверки
-{
-    emit signalAll();
-}
-
-void SongDialog::statusGetValue()
-{
-    emit signalAll();
 }
 
 void SongDialog::preview_draw(int numb)//запись измененной картинки в таблицу

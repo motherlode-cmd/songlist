@@ -10,18 +10,16 @@
 #include <QVariantMap>
 #include <QPixmap>
 #include <QDir>
-ServiceData::ServiceData()
-{
 
-}
 QList <Song*> ServiceData::readFile() //в текущей директории создается файл, с котором будут храниться текстовые данные о песне
 {
     QString val;
     QString filename =  ".//test.json";
     QFile file(filename);
-     file.open(QIODevice::ReadOnly | QIODevice::Text);
-     if (!file.isOpen()) {
-         std::cout<< "Can't open file."<<std::endl;
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    if (!file.isOpen()) {
+        std::cout<< "Can't open file."<<std::endl;
+        return;
      }
      val = file.readAll();
      file.close();

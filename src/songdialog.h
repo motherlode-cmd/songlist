@@ -10,33 +10,6 @@ class SongDialog;
 class SongDialog : public QDialog
 {
     Q_OBJECT
-public:
-    void setToolStr(const QString strTool);
-    void setCreatedParam(bool setting);
-    bool isChanged();
-    void setNum(int * num);
-    void change_model(QStandardItemModel * model);
-    void preview_draw(int numb);
-    void write_albom_info(int numb);
-    void set_info(int numb);
-    void unblock_ok();
-    SongDialog(QWidget* parent = nullptr);
-    ~SongDialog();
-signals:
-    void signalAll();
-
-private slots:
-    void statusSetValue(int value);
-    void statusGetValue();
-    void on_buttonBox_OK_clicked(QAbstractButton *button);
-    void unlock_buttomBoxOK();
-
-    void on_lineEdit_name_textChanged(const QString &arg1);
-
-    void on_lineEdit_auvtor_textChanged(const QString &arg1);
-
-    void on_lineEdit_time_textChanged(const QString &arg1);
-
 private:
     void choosePreview();
     QString copiedPreview(const QString& filePath) const;
@@ -55,5 +28,53 @@ private:
     bool cancelButtonClicked = false;
     bool isSongCreated = true;
     QString strTool = "ВВедите недостающие данные";
+public:
+    void setToolStr(const QString strTool_);
+
+    void setCreatedParam(bool setting)
+    {
+        isSongCreated = setting;
+    }
+
+    bool isChanged()
+    {
+        return !cancelButtonClicked;
+    }
+    void setNum(int * num_)
+    {
+        num = num_;
+    }
+    void change_model(QStandardItemModel * model_)
+    {
+        model = model_;
+    }
+
+    void preview_draw(int numb);
+    void write_albom_info(int numb);
+    void set_info(int numb);
+    void unblock_ok();
+    SongDialog(QWidget* parent = nullptr);
+    ~SongDialog();
+signals:
+    void signalAll();
+
+private slots:
+    void statusSetValue(int value)
+    {
+        emit signalAll();
+    }
+    void statusGetValue()
+    {
+        emit signalAll();
+    }
+    void on_buttonBox_OK_clicked(QAbstractButton *button);
+    void unlock_buttomBoxOK();
+
+    void on_lineEdit_name_textChanged(const QString &arg1);
+
+    void on_lineEdit_auvtor_textChanged(const QString &arg1);
+
+    void on_lineEdit_time_textChanged(const QString &arg1);
+
 };
 
