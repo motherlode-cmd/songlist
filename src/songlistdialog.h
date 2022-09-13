@@ -39,8 +39,8 @@ private:
     void fillRow(Song * current, int number);
     void fillTable();
     Ui::SongListDialog* m_ui = nullptr;
-     QStandardItemModel* model = nullptr;
-     int num = 0;
-     bool isSorting = false;
-     int rowForRedOrDelete = 0;
+    QStandardItemModel* model = nullptr;
+    int num = 0;
+    bool isSorting = false;
+    int rowForRedOrDelete = 0;
 };

@@ -10,6 +10,7 @@
 #include <QVariantMap>
 #include <QPixmap>
 #include <QDir>
+#include <QVariant>
 
 QList <Song*> ServiceData::readFile() //в текущей директории создается файл, с котором будут храниться текстовые данные о песне
 {
@@ -19,7 +20,7 @@ QList <Song*> ServiceData::readFile() //в текущей директории �
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     if (!file.isOpen()) {
         std::cout<< "Can't open file."<<std::endl;
-        return;
+       // return QList <Song*>;
      }
      val = file.readAll();
      file.close();
@@ -33,7 +34,7 @@ void ServiceData::writeFile(QList <Song*> songs) // запись песен в �
     {
         QJsonObject item;
         item.insert("name", tmp->getName());
-        item.insert("author", tmp->getAuvtor());
+        item.insert("author", tmp->getAuthor());
         item.insert("time", tmp->getTime());
         item.insert("status", tmp->getStatus());
         item.insert("image", tmp->getImgName());
@@ -59,6 +60,7 @@ void ServiceData::savePixmap(QPixmap image, Song * song) //сохранение 
     {
         std::cout<<("Cannot find the example directory")<<std::endl;
         bool ok = dir->mkdir("images");
+        if(!ok) return;
     }//если еще нет папки, то мы ее создаем
     QFile file(dir->path() + "/images/" + song->getImgName());
     song->setImageName(dir->path() + "/images/" + song->getImgName()); //меняем название картинки на путь к файлу
@@ -90,10 +92,11 @@ QList <Song*> ServiceData::parseData(QString val) //получаем лист п
 {
     QList <Song*> listItems;
     QJsonDocument doc = QJsonDocument::fromJson(val.toUtf8());
-    QJsonArray array = doc.array();
-    for(auto v : array)
+    //QJsonArray array = doc.array();
+    QVariantList array = doc.toVariant().toList();
+    for(auto& v : array)
     {
-        QJsonObject data = v.toObject();
+        QJsonObject data = v.toJsonObject();
         QString name = data["name"].toString();
         QString author = data["author"].toString();
         QString time = data["time"].toString();

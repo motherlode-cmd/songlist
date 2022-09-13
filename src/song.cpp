@@ -1,9 +1,9 @@
 #include "song.h"
 
-Song::Song(QString name, QString auvtor, QString time, QString imgName, QString status)
+Song::Song(QString name, QString author, QString time, QString imgName, QString status)
 {
     this->name = name;
-    this->auvtor = auvtor;
+    this->author = author;
     this->time = time;
     this->imgName = imgName;
     this->status = status;
@@ -14,9 +14,9 @@ const QString &Song::getName() const
     return name;
 }
 
-const QString &Song::getAuvtor() const
+const QString &Song::getAuthor() const
 {
-    return auvtor;
+    return author;
 }
 
 void Song::setImageName(QString name)

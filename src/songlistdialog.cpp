@@ -13,7 +13,7 @@ SongListDialog::SongListDialog(QWidget *parent): QDialog(parent)
     m_ui = new Ui::SongListDialog();
     m_ui->setupUi(this);
     model = new QStandardItemModel();
-    QStringList titles = QObject::trUtf8("preview,name,auvtor,time,stat").simplified().split(",");
+    QStringList titles = {"preview","name","author","time","stat"};
     model->setHorizontalHeaderLabels(titles);
     m_ui->tableView->setModel(model);
     fillTable(); // Заполненение таблицы данными
@@ -32,7 +32,7 @@ void SongListDialog::fillRow(Song *current, int rowCount) //функция за�
 {
     model->setItem(rowCount, 0, ServiceData().standardItemPixmap(current));
     model->setItem(rowCount, 1,  new QStandardItem(current->getName()));
-    model->setItem(rowCount, 2, new QStandardItem(current->getAuvtor()));
+    model->setItem(rowCount, 2, new QStandardItem(current->getAuthor()));
     model->setItem(rowCount, 3,  new QStandardItem(current->getTime()));
     model->setItem(rowCount, 4, new QStandardItem(current->getStatus()));
 }
@@ -42,7 +42,7 @@ void SongListDialog::fillTable()//считывание файла и запол�
     ServiceData sd;
     auto data = sd.readFile(); //получаем список песен из файла QList <Song*>
     int rowCount = 0;
-    for(auto current : data)
+    for(auto& current : data)
     {
         fillRow(current, rowCount);
         rowCount++;
@@ -130,11 +130,11 @@ void SongListDialog::on_pushButton_red_clicked()
     m_ui->pushButton_red->setEnabled(false);
 }
 
-void SongListDialog::setRowTools(int rowNum)
+void SongListDialog::setRowTools(int row)
 {
     for(int i = 0; i < 4; i++) {
-        QStandardItem * currentUtem = model->item(rowNum, i);
-        currentUtem->setToolTip("Оценка: " + model->item(rowNum, 4)->text());
+        QStandardItem * currentUtem = model->item(row, i);
+        currentUtem->setToolTip("Оценка: " + model->item(row, 4)->text());
     }
 }
 

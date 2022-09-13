@@ -22,7 +22,7 @@ private:
     int * num = nullptr;//номер текущей строки, если была вызвана кнопка создания, то в последующем она увеличится
     bool check = false;//переменная для контроля рисования текущей картинки
     int isName = 0; //переменные для хранения информации о песнях, чтобы пользователь не мог ввести пустую строку
-    int isAuvtor = 0;
+    int isAuthor = 0;
     int isTime = 0;
     int isPixmap = 0;
     bool cancelButtonClicked = false;
@@ -72,7 +72,7 @@ private slots:
 
     void on_lineEdit_name_textChanged(const QString &arg1);
 
-    void on_lineEdit_auvtor_textChanged(const QString &arg1);
+    void on_lineEdit_author_textChanged(const QString &arg1);
 
     void on_lineEdit_time_textChanged(const QString &arg1);
 

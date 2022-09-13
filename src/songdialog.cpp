@@ -97,7 +97,7 @@ void SongDialog::write_albom_info(int numb)//перенос введенных �
 {
     const QString slide = QString::number(m_ui->status->value());
     model->setItem(numb, 1, new QStandardItem(m_ui->lineEdit_name->text()));
-    model->setItem(numb, 2, new QStandardItem(m_ui->lineEdit_auvtor->text()));
+    model->setItem(numb, 2, new QStandardItem(m_ui->lineEdit_author->text()));
     model->setItem(numb, 3, new QStandardItem(m_ui->lineEdit_time->text()));
     model->setItem(numb, 4, new QStandardItem(slide));
 }
@@ -106,7 +106,7 @@ void SongDialog::set_info(int numb)//заполнение данными из т
 {
     m_ui->labelPreview->setPixmap(model->item(numb,0)->data(Qt::DecorationRole).value<QPixmap>());
     m_ui->lineEdit_name->setText((model->item(numb, 1))->text());
-    m_ui->lineEdit_auvtor->setText((model->item(numb, 2))->text());
+    m_ui->lineEdit_author->setText((model->item(numb, 2))->text());
     m_ui->lineEdit_time->setText((model->item(numb, 3))->text());
     m_ui->status->setSliderPosition(stoi((model->item(numb, 4)->text()).toStdString()));
     isPixmap = 1;
@@ -128,9 +128,9 @@ void SongDialog::on_buttonBox_OK_clicked(QAbstractButton *button)//сохран�
 
 void SongDialog::unlock_buttomBoxOK() //проверка на корректность введенных данных(они не пустые) или изменений(они должныы быть)
 {
-    if(isName + isTime + isPixmap + isAuvtor == 4 && (isSongCreated || //если песня создавалась, то автоматически true и сверять данные не с чем
+    if(isName + isTime + isPixmap + isAuthor == 4 && (isSongCreated || //если песня создавалась, то автоматически true и сверять данные не с чем
                                                            m_ui->lineEdit_name->text() != model->item(*num, 1)->text() ||
-                                                           m_ui->lineEdit_auvtor->text() != model->item(*num, 2)->text() ||
+                                                           m_ui->lineEdit_author->text() != model->item(*num, 2)->text() ||
                                                            m_ui->lineEdit_time->text() != model->item(*num, 3)->text() ||
                                                            QString::number(m_ui->status->value()) != model->item(*num, 4)->text() ||
                                                            m_ui->labelPreview->pixmap()->toImage() != model->item(*num,0)->data(Qt::DecorationRole).value<QImage>()
@@ -158,16 +158,16 @@ void SongDialog::on_lineEdit_name_textChanged(const QString &arg1) //3 очен�
     }
 }
 
-void SongDialog::on_lineEdit_auvtor_textChanged(const QString &arg1)
+void SongDialog::on_lineEdit_author_textChanged(const QString &arg1)
 {
-    if(m_ui->lineEdit_auvtor->text() != "")
+    if(m_ui->lineEdit_author->text() != "")
     {
-        isAuvtor = 1;
+        isAuthor = 1;
         emit signalAll();
-        m_ui->lineEdit_auvtor->setStyleSheet("background-color: rgb(255, 255, 255)");
+        m_ui->lineEdit_author->setStyleSheet("background-color: rgb(255, 255, 255)");
     } else
     {
-        m_ui->lineEdit_auvtor->setStyleSheet("background-color: rgb(255, 144, 144)");
+        m_ui->lineEdit_author->setStyleSheet("background-color: rgb(255, 144, 144)");
         m_ui->buttonBox_OK->button(QDialogButtonBox::Ok)->setEnabled(false);
     }
 }
